@@ -1,0 +1,37 @@
+<h3>Casa de interés social</h3>
+
+<div>
+	<label>Costo de la casa</label>
+	<input type="number" @bind="CostoCasa" @bind:event="oninput" />
+</div>
+<div>
+	<label>Ingresos del comprador</label>
+	<input type="number" @bind="Ingresos" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Enganche: @Enganche</p>
+<p>Pago mensual: @PagoMensual</p>
+<p>@mensaje</p>
+
+@code {
+	double CostoCasa, Ingresos, Enganche, PagoMensual;
+	string mensaje = "";
+
+	void calcular()
+	{
+		if (Ingresos < 8000)
+		{
+			Enganche = CostoCasa * 0.15;
+			PagoMensual = (CostoCasa - Enganche) / 120;
+			mensaje = "Enganche del 15%; el resto se paga en 10 años.";
+		}
+		else
+		{
+			Enganche = CostoCasa * 0.30;
+			PagoMensual = (CostoCasa - Enganche) / 84;
+			mensaje = "Enganche del 30%; el resto se paga en 7 años.";
+		}
+	}
+}

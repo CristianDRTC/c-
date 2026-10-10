@@ -1,0 +1,26 @@
+@rendermode InteractiveServer
+
+<h3>Sumar</h3>
+
+<div>
+    <label>Número 1:</label>
+    <input type="number" @bind="num1" @bind:event="oninput" />
+</div>
+<div>
+    <label>Número 2:</label>
+    <input type="number" @bind="num2" @bind:event="oninput" />
+</div>
+<button @onclick="Calcular">Sumar</button>
+
+<p>Resultado: @resultado</p>
+
+@code {
+    double num1;
+    double num2;
+    double resultado;
+
+    void Calcular()
+    {
+        resultado = num1 + num2;
+    }
+}

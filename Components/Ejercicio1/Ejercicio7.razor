@@ -1,0 +1,33 @@
+<h3>Descuento en almacén</h3>
+
+<div>
+	<label>Importe de la compra</label>
+	<input type="number" @bind="Compra" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Descuento: @Descuento</p>
+<p>Total a pagar: @TotalPagar</p>
+<p>@mensaje</p>
+
+@code {
+	double Compra, Descuento, TotalPagar;
+	string mensaje = "";
+
+	void calcular()
+	{
+		if (Compra > 1000)
+		{
+			Descuento = Compra * 0.20;
+			mensaje = "Se aplicó un descuento del 20%.";
+		}
+		else
+		{
+			Descuento = 0;
+			mensaje = "La compra no supera $1.000; no aplica descuento.";
+		}
+
+		TotalPagar = Compra - Descuento;
+	}
+}

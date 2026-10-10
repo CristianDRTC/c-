@@ -1,0 +1,52 @@
+<h3>Ahorro para el Retiro (SAR)</h3>
+
+<div>
+	<label>Salario mensual</label>
+	<input type="number" @bind="Salario" @bind:event="oninput" />
+</div>
+<div>
+	<label>Porcentaje que aporta la empresa</label>
+	<input type="number" @bind="PorcentajeEmpresa" @bind:event="oninput" />
+</div>
+<div>
+	<label>Tipo de aportación del trabajador</label>
+	<select @bind="TipoAportacion">
+		<option value="Fija">Cuota fija</option>
+		<option value="Porcentaje">Porcentaje del salario</option>
+	</select>
+</div>
+<div>
+	<label>@(TipoAportacion == "Fija" ? "Cuota fija" : "Porcentaje del salario")</label>
+	<input type="number" @bind="AportacionTrabajador" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Total depositado al SAR: @TotalSAR</p>
+<p>Pago mensual que recibirá: @PagoMensual</p>
+<p>@mensaje</p>
+
+@code {
+	double Salario, PorcentajeEmpresa, AportacionTrabajador;
+	double TotalSAR, PagoMensual;
+	string TipoAportacion = "Fija", mensaje = "";
+
+	void calcular()
+	{
+		double AporteEmpresa = Salario * PorcentajeEmpresa / 100;
+		double AporteTrabajador;
+
+		if (TipoAportacion == "Porcentaje")
+		{
+			AporteTrabajador = Salario * AportacionTrabajador / 100;
+		}
+		else
+		{
+			AporteTrabajador = AportacionTrabajador;
+		}
+
+		TotalSAR = AporteEmpresa + AporteTrabajador;
+		PagoMensual = Salario - AporteTrabajador;
+		mensaje = "El pago mensual descuenta únicamente la aportación del trabajador.";
+	}
+}

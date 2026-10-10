@@ -1,0 +1,28 @@
+@namespace prueba.Components.Ejercicio1
+
+<h3>Depto</h3>
+
+<div>
+    <label>Monto de la finanza</label>
+    <input type="number" @bind="mont" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Cuota a pagar: @resultado</p>
+
+@code {
+    double mont, resultado;
+
+    void calcular()
+    {
+        if (mont > 50000)
+        {
+            resultado = (mont * 3) / 100;
+        }
+        else
+        {
+            resultado = (mont * 2) / 100;
+        }
+    }
+}

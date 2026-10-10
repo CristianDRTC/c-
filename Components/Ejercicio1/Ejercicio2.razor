@@ -1,0 +1,36 @@
+<h3>Escuela</h3>
+
+<div>
+    <label>Materias que cursa</label>
+    <input type="number" @bind="Materias" @bind:event="oninput" />
+</div>
+<div>
+    <label>Promedio</label>
+    <input type="number" @bind="Promedio" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Total a pagar: @resultado</p>
+<p>@mensaje</p>
+
+@code {
+
+    double Valordemateria = 200000;
+    double Materias, Promedio, resultado;
+    string mensaje = "";
+
+    void calcular()
+    {
+        if (Promedio >= 9)
+        {
+            resultado = Valordemateria * Materias * 0.70;
+            mensaje = "Se aplicó el 30% de descuento y no se cobra IVA.";
+        }
+        else
+        {
+            resultado = Valordemateria * Materias * 1.10;
+            mensaje = "Se agregó el 10% de IVA.";
+        }
+    }
+}

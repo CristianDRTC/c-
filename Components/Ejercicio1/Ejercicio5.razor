@@ -1,0 +1,37 @@
+<h3>Interés de inversión</h3>
+
+<div>
+	<label>Capital invertido</label>
+	<input type="number" @bind="Capital" @bind:event="oninput" />
+</div>
+<div>
+	<label>Porcentaje de interés</label>
+	<input type="number" @bind="PorcentajeInteres" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Interés generado: @Interes</p>
+<p>Capital final: @CapitalFinal</p>
+<p>@mensaje</p>
+
+@code {
+	double Capital, PorcentajeInteres, Interes, CapitalFinal;
+	string mensaje = "";
+
+	void calcular()
+	{
+		Interes = Capital * PorcentajeInteres / 100;
+
+		if (Interes > 7000)
+		{
+			CapitalFinal = Capital + Interes;
+			mensaje = "El interés supera $7.000 y se reinvierte.";
+		}
+		else
+		{
+			CapitalFinal = Capital;
+			mensaje = "El interés no supera $7.000; no se reinvierte.";
+		}
+	}
+}

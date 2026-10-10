@@ -1,0 +1,38 @@
+<h3>Resultado del curso</h3>
+
+<div>
+	<label>Calificación 1</label>
+	<input type="number" @bind="Calificacion1" @bind:event="oninput" />
+</div>
+<div>
+	<label>Calificación 2</label>
+	<input type="number" @bind="Calificacion2" @bind:event="oninput" />
+</div>
+<div>
+	<label>Calificación 3</label>
+	<input type="number" @bind="Calificacion3" @bind:event="oninput" />
+</div>
+
+<button @onclick="calcular">Calcular</button>
+
+<p>Promedio: @Promedio</p>
+<p>@mensaje</p>
+
+@code {
+	double Calificacion1, Calificacion2, Calificacion3, Promedio;
+	string mensaje = "";
+
+	void calcular()
+	{
+		Promedio = (Calificacion1 + Calificacion2 + Calificacion3) / 3;
+
+		if (Promedio >= 70)
+		{
+			mensaje = "Alumno aprobado.";
+		}
+		else
+		{
+			mensaje = "Alumno reprobado.";
+		}
+	}
+}
